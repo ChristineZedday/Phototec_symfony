@@ -11,17 +11,19 @@ class FouilleDossier
 	}
 
 
-	function reconnaitPhoto(string $file):boolean 
-	{
-		if (pathinfo($file, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($file, PATHINFO_EXTENSION)=== 'jpg') {
-			return 1;
-		}
-		else {return 0;}
-	}
+	// function reconnaitPhoto(string $file):boolean 
+	// {
+	// 	if (pathinfo($file, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($file, PATHINFO_EXTENSION)=== 'jpg') {
+	// 		return 1;
+	// 	}
+	// 	else {return 0;}
+	// }
 
 	function chargePhotos(string $dossier, objectManager $manager)
 	{
 		//enregistre toutes les photos du dossier dans la base
+		$fichiers = glob($dossier, '*.{jpg,jpeg,JPG,JPEG}',GLOB_BRACE);
+		dd($fichiers);
 		$nb_fichiers = 0;
 		
         if ($dossier = opendir("$dossier"))
