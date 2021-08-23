@@ -103,7 +103,7 @@ class DossierController extends AbstractController
     {
         $form = $this->createFormBuilder()
        
-        ->add('dossier', EntityType::class, array('class'=>Dossiers, choiceLabel=>'nom'))
+        ->add('dossier', EntityType::class, array('class'=>Dossier, choiceLabel=>'nom'))
        
       
         ->getForm();
