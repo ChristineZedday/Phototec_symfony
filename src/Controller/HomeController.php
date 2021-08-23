@@ -13,8 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 
 class HomeController extends AbstractController
 {
@@ -35,7 +34,7 @@ class HomeController extends AbstractController
     {
         $form = $this->createFormBuilder()
        
-        ->add('dossier', FileType::class)
+        ->add('dossier', EntityType::class, array('class'=>Dossiers, choiceLabel=>'nom'))
        
       
         ->getForm();
@@ -47,8 +46,8 @@ class HomeController extends AbstractController
         // data is an array with "name", "email", and "message" keys
         $data = $form->getData();
         $fichier = $data['dossier'];
-        $dossier = pathinfo($fichier);
-        dd($dossier);
+        
+        dd($fichier);
     }
         
         

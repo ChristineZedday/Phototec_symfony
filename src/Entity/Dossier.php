@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=DossiersRepository::class)
  */
-class Dossiers
+class Dossier
 {
     /**
      * @ORM\Id
