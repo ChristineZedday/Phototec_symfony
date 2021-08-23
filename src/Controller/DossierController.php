@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Dossier;
 use App\Form\DossierType;
-use App\Repository\DossiersRepository;
+use App\Repository\DossierRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,10 +21,10 @@ class DossierController extends AbstractController
     /**
      * @Route("/", name="dossier_index", methods={"GET"})
      */
-    public function index(DossiersRepository $dossiersRepository): Response
+    public function index(DossierRepository $dossierRepository): Response
     {
         return $this->render('dossier/index.html.twig', [
-            'dossiers' => $dossiersRepository->findAll(),
+            'dossier' => $dossierRepository->findAll(),
         ]);
     }
 

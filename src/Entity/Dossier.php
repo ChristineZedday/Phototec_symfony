@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\DossiersRepository;
+use App\Repository\DossierRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=DossiersRepository::class)
+ * @ORM\Entity(repositoryClass=DossierRepository::class)
  */
 class Dossier
 {
