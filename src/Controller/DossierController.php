@@ -18,6 +18,35 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
  */
 class DossierController extends AbstractController
 {
+
+     /**
+     *  @Route("/ajouter", name="ajouter", methods={"GET", "POST"})
+     */
+    public function ajouterDossier(Request $request): Response
+    {
+        $form = $this->createFormBuilder()
+       
+        ->add('dossier', EntityType::class, array('class'=>'Dossier', 'choice_label'=>'nom'))
+       
+      
+        ->getForm();
+
+
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        // data is an array with "name", "email", and "message" keys
+        $data = $form->getData();
+        $fichier = $data['dossier'];
+        
+        dd($fichier);
+    }
+        
+        return $this->render('ajouter/ajouter.html.twig', [
+             'form' => $form->createView(),
+        ]);
+    }
+
     /**
      * @Route("/", name="dossier_index", methods={"GET"})
      */
@@ -96,34 +125,5 @@ class DossierController extends AbstractController
     }
 
     
-    /**
-     *  @Route("/dossier/ajouter", name="ajouter", methods={"GET", "POST"})
-     */
-    public function ajouterDossier(Request $request): Response
-    {
-        $form = $this->createFormBuilder()
-       
-        ->add('dossier', EntityType::class, array('class'=>'Dossier', 'choice_label'=>'nom'))
-       
-      
-        ->getForm();
-
-
-    $form->handleRequest($request);
-
-    if ($form->isSubmitted() && $form->isValid()) {
-        // data is an array with "name", "email", and "message" keys
-        $data = $form->getData();
-        $fichier = $data['dossier'];
-        
-        dd($fichier);
-    }
-        
-        
-        
-        
-        return $this->render('ajouter/ajouter.html.twig', [
-             'form' => $form->createView(),
-        ]);
-    }
+   
 }
