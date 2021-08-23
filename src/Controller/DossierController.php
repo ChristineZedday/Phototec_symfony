@@ -97,13 +97,13 @@ class DossierController extends AbstractController
 
     
     /**
-     *  @Route("/ajouter", name="ajouter", methods={"GET", "POST"})
+     *  @Route("/dossier/ajouter", name="ajouter", methods={"GET", "POST"})
      */
     public function ajouterDossier(Request $request): Response
     {
         $form = $this->createFormBuilder()
        
-        ->add('dossier', EntityType::class, array('class'=>Dossier, choiceLabel=>'nom'))
+        ->add('dossier', EntityType::class, array('class'=>'Dossier', 'choice_label'=>'nom'))
        
       
         ->getForm();
