@@ -123,7 +123,7 @@ class DossierController extends AbstractController
         
         
         return $this->render('ajouter/ajouter.html.twig', [
-            'controller_name' => 'HomeController', 'form' => $form->createView(),
+             'form' => $form->createView(),
         ]);
     }
 }
