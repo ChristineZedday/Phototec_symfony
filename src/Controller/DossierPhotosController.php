@@ -9,9 +9,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 /**
- * @Route("/dossier/photos")
+ * @Route("/dossier")
  */
 class DossierPhotosController extends AbstractController
 {
@@ -24,7 +25,7 @@ class DossierPhotosController extends AbstractController
     {
         $form = $this->createFormBuilder()
        
-        ->add('dossier', EntityType::class, array('class'=>'Dossier', 'choice_label'=>'nom'))
+        ->add('dossierPhotos', EntityType::class, array('class'=>'DossierPhotos', 'choice_label'=>'nom'))
        
       
         ->getForm();
@@ -35,7 +36,7 @@ class DossierPhotosController extends AbstractController
     if ($form->isSubmitted() && $form->isValid()) {
         // data is an array with "name", "email", and "message" keys
         $data = $form->getData();
-        $fichier = $data['dossier'];
+        $fichier = $data['dossierPhotos'];
         
         dd($fichier);
     }
@@ -45,7 +46,7 @@ class DossierPhotosController extends AbstractController
         ]);
     }
 
-    
+
     /**
      * @Route("/", name="dossier_photos_index", methods={"GET"})
      */

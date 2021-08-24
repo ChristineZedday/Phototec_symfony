@@ -24,10 +24,7 @@ class Photo
      */
     private $nom;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $chemin;
+
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -43,6 +40,16 @@ class Photo
      * @ORM\ManyToMany(targetEntity=Sujet::class, inversedBy="photos")
      */
     private $sujets;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=DossierPhotos::class, inversedBy="photos")
+     */
+    private $dossier;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $description;
 
     public function __construct()
     {
@@ -62,18 +69,6 @@ class Photo
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getChemin(): ?string
-    {
-        return $this->chemin;
-    }
-
-    public function setChemin(string $chemin): self
-    {
-        $this->chemin = $chemin;
 
         return $this;
     }
@@ -122,6 +117,30 @@ class Photo
     public function removeSujet(Sujet $sujet): self
     {
         $this->sujets->removeElement($sujet);
+
+        return $this;
+    }
+
+    public function getDossier(): ?DossierPhotos
+    {
+        return $this->dossier;
+    }
+
+    public function setDossier(?DossierPhotos $dossier): self
+    {
+        $this->dossier = $dossier;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

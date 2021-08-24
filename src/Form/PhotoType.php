@@ -13,10 +13,10 @@ class PhotoType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('chemin')
             ->add('date')
             ->add('lieu')
             ->add('sujets')
+            ->add('description')
         ;
     }
 
