@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DossierPhotos index{% endblock %}
+
+{% block body %}
+    <h1>DossierPhotos index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Chemin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dossier_photo in dossier_photos %}
+            <tr>
+                <td>{{ dossier_photo.id }}</td>
+                <td>{{ dossier_photo.nom }}</td>
+                <td>{{ dossier_photo.chemin }}</td>
+                <td>
+                    <a href="{{ path('dossier_photos_show', {'id': dossier_photo.id}) }}">show</a>
+                    <a href="{{ path('dossier_photos_edit', {'id': dossier_photo.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('dossier_photos_new') }}">Create new</a>
+{% endblock %}

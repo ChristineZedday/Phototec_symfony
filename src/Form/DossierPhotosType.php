@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Dossier;
+use App\Entity\DossierPhotos;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DossierType extends AbstractType
+class DossierPhotosType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -20,7 +20,7 @@ class DossierType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Dossier::class,
+            'data_class' => DossierPhotos::class,
         ]);
     }
 }

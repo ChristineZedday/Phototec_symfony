@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Dossier;
+use App\Entity\DossierPhotos;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Dossier|null find($id, $lockMode = null, $lockVersion = null)
- * @method Dossier|null findOneBy(array $criteria, array $orderBy = null)
- * @method Dossier[]    findAll()
- * @method Dossier[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method DossierPhotos|null find($id, $lockMode = null, $lockVersion = null)
+ * @method DossierPhotos|null findOneBy(array $criteria, array $orderBy = null)
+ * @method DossierPhotos[]    findAll()
+ * @method DossierPhotos[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class DossierRepository extends ServiceEntityRepository
+class DossierPhotosRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Dossier::class);
+        parent::__construct($registry, DossierPhotos::class);
     }
 
     // /**
-    //  * @return Dossier[] Returns an array of Dossiers objects
+    //  * @return DossierPhotos[] Returns an array of DossierPhotos objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class DossierRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Dossier
+    public function findOneBySomeField($value): ?DossierPhotos
     {
         return $this->createQueryBuilder('d')
             ->andWhere('d.exampleField = :val')

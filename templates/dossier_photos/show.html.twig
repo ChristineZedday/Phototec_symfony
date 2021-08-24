@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DossierPhotos{% endblock %}
+
+{% block body %}
+    <h1>DossierPhotos</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ dossier_photo.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ dossier_photo.nom }}</td>
+            </tr>
+            <tr>
+                <th>Chemin</th>
+                <td>{{ dossier_photo.chemin }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('dossier_photos_index') }}">back to list</a>
+
+    <a href="{{ path('dossier_photos_edit', {'id': dossier_photo.id}) }}">edit</a>
+
+    {{ include('dossier_photos/_delete_form.html.twig') }}
+{% endblock %}
