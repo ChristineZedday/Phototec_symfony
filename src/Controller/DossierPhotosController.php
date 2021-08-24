@@ -10,19 +10,35 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+
 
 /**
  * @Route("/dossier")
  */
 class DossierPhotosController extends AbstractController
 {
+   
 
+ 
+     /**
+     *  @Route("/seeding", name="seeding", methods={"GET", "POST"})
+     */
+    public function seedDossiers(Request $request): Response
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $racine = $this->getParameter('Racine'); //paramètre yaml
+        chargeDossier($manager, $racine);
+       
+        return $this->redirectToRoute('dossier_photos_index');
+    }
     
      /**
      *  @Route("/ajouter", name="ajouter", methods={"GET", "POST"})
      */
     public function ajouterDossier(Request $request): Response
     {
+
         $form = $this->createFormBuilder()
        
         ->add('dossierPhotos', EntityType::class, array('class'=>'DossierPhotos', 'choice_label'=>'nom'))
@@ -122,5 +138,27 @@ class DossierPhotosController extends AbstractController
         }
 
         return $this->redirectToRoute('dossier_photos_index', [], Response::HTTP_SEE_OTHER);
+    }
+}
+function chargeDossier($manager, $racine) {
+    $nb_dossiers = 0;
+    if ($dir = @opendir($racine)) {
+        while(false !== ($dossier = readdir($dir))) {
+            
+            if($dossier != '.' && $dossier != '..' && pathinfo($dossier, PATHINFO_EXTENSION)== null) {
+                $nb_dossiers ++;
+                $dossierNouveau = New DossierPhotos();
+                $dossierNouveau->setNom($dossier) ;
+                $dossierNouveau->setChemin($racine) ;
+                $manager->persist($dossierNouveau);
+                $racine = $racine.'/'.$dossier;
+                chargeDossier($manager, $racine);
+            }
+        }
+        $manager->flush();
+        
+    }
+    else {
+        echo ("pas glop");
     }
 }
