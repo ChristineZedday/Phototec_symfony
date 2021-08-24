@@ -151,8 +151,8 @@ function chargeDossier($manager, $racine) {
                 $dossierNouveau->setNom($dossier) ;
                 $dossierNouveau->setChemin($racine) ;
                 $manager->persist($dossierNouveau);
-                $racine = $racine.'/'.$dossier;
-                chargeDossier($manager, $racine);
+                $depart = $racine.'/'.$dossier;
+                chargeDossier($manager, $depart);
             }
         }
         $manager->flush();
