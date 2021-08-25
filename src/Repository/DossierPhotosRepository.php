@@ -36,7 +36,7 @@ class DossierPhotosRepository extends ServiceEntityRepository
     }
     */
 
-    /*
+    
     public function findOneBySomeField($value): ?DossierPhotos
     {
         return $this->createQueryBuilder('d')
@@ -46,5 +46,5 @@ class DossierPhotosRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
+    
 }

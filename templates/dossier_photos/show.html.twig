@@ -26,5 +26,7 @@
 
     <a href="{{ path('dossier_photos_edit', {'id': dossier_photo.id}) }}">edit</a>
 
+     <a href="{{ path('ajouter', {'id': dossier_photo.id}) }}">remplir</a>
+
     {{ include('dossier_photos/_delete_form.html.twig') }}
 {% endblock %}

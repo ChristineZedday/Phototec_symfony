@@ -19,10 +19,11 @@
             <tr>
                 <td>{{ dossier_photo.id }}</td>
                 <td>{{ dossier_photo.nom }}</td>
-                <td>{{ dossier_photo.chemin }}</td>
+                <td>{{ dossier_photo.dossier }}</td>
                 <td>
                     <a href="{{ path('dossier_photos_show', {'id': dossier_photo.id}) }}">show</a>
                     <a href="{{ path('dossier_photos_edit', {'id': dossier_photo.id}) }}">edit</a>
+                      <a href="{{ path('ajouter', {'id': dossier_photo.id}) }}">remplir</a>
                 </td>
             </tr>
         {% else %}

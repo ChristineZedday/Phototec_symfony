@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use App\Service\FouilleDossier;
 
 
 /**
@@ -34,34 +35,21 @@ class DossierPhotosController extends AbstractController
     }
     
      /**
-     *  @Route("/ajouter", name="ajouter", methods={"GET", "POST"})
+     *  @Route("{id}/ajouter", name="ajouter", methods={"GET", "POST"})
      */
-    public function ajouterDossier(Request $request): Response
+    public function ajouterPhotos(Request $request, DossierPhotos $dossierPhotos, FouilleDossier $fouille ): Response
     {
-
-        $form = $this->createFormBuilder()
-       
-        ->add('dossierPhotos', EntityType::class, array('class'=>'DossierPhotos', 'choice_label'=>'nom'))
-       
       
-        ->getForm();
+        $manager = $this->getDoctrine()->getManager();
+        $fouille->chargePhotos($dossierPhotos, $manager);
 
 
-    $form->handleRequest($request);
 
-    if ($form->isSubmitted() && $form->isValid()) {
-        // data is an array with "name", "email", and "message" keys
-        $data = $form->getData();
-        $fichier = $data['dossierPhotos'];
         
-        dd($fichier);
+        
+        return $this->redirectToRoute('photo_index');
     }
         
-        return $this->render('ajouter/ajouter.html.twig', [
-             'form' => $form->createView(),
-        ]);
-    }
-
 
     /**
      * @Route("/", name="dossier_photos_index", methods={"GET"})

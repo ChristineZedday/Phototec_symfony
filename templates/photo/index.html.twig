@@ -10,7 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
-                <th>Chemin</th>
+                <th>Dossier</th>
                 <th>Date</th>
                 <th>actions</th>
             </tr>
@@ -20,7 +20,7 @@
             <tr>
                 <td>{{ photo.id }}</td>
                 <td>{{ photo.nom }}</td>
-                <td>{{ photo.chemin }}</td>
+                <td>{{ photo.dossier }}</td>
                 <td>{{ photo.date ? photo.date|date('Y-m-d') : '' }}</td>
                 <td>
                     <a href="{{ path('photo_show', {'id': photo.id}) }}">show</a>

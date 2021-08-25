@@ -2,47 +2,47 @@
 namespace App\Service;
 
 use Doctrine\Persistence\ObjectManager;
+use App\Entity\Photo;
+use App\Entity\DossierPhotos;
 
 class FouilleDossier 
 {
-	function selectionnerDossier():string 
-	{
-		return "Pas encore implémentée";
-	}
+	
 
-
-	// function reconnaitPhoto(string $file):boolean 
-	// {
-	// 	if (pathinfo($file, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($file, PATHINFO_EXTENSION)=== 'jpg') {
-	// 		return 1;
-	// 	}
-	// 	else {return 0;}
-	// }
-
-	function chargePhotos(string $dossier, objectManager $manager)
+	public function chargePhotos(DossierPhotos $dossier, objectManager $manager)
 	{
 		//enregistre toutes les photos du dossier dans la base
-		$fichiers = glob($dossier, '*.{jpg,jpeg,JPG,JPEG}',GLOB_BRACE);
-		dd($fichiers);
-		$nb_fichiers = 0;
+		// $fichiers = glob( '*.{jpg,jpeg,JPG,JPEG}',GLOB_BRACE);
 		
-        if ($dossier = opendir("$dossier"))
+		$nb_fichiers = 0;
+		$dirpath =$dossier->getChemin().'/'.$dossier->getNom();
+		
+        if ($dir = opendir("$dirpath"))
         {
-            while(false !== ($fichier = readdir($dossier)))
+            while(false !== ($fichier = readdir($dir)))
             {
-                if(reconnaitPhoto($fichier))
-                {
+                if (FouilleDossier::is_photo($fichier)) {
                    $nb_fichiers++;
                     $photo = new Photo();
                     $photo->setNom($fichier);
+					$photo->setDossier($dossier);
                    
                     $manager->persist($photo);
                    
-                }
+				}
                     
             }
             $manager->flush();
         }
         else { dd('pas bon le chemin');}
 	}
+
+	static function is_photo(string $file):bool
+	{
+		if (pathinfo($file, PATHINFO_EXTENSION) === 'jpeg' || pathinfo($file, PATHINFO_EXTENSION)=== 'jpg' || pathinfo($file, PATHINFO_EXTENSION) === 'JPEG' || pathinfo($file, PATHINFO_EXTENSION)=== 'JPG') {
+			return true;
+		}
+		else {return false;}
+	}
 }
+
